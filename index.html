@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<title>Ride Guardian | Control Centre</title>
+<style>
+:root{--bg:#080d18;--panel:#111a2b;--panel2:#0d1524;--line:#26344a;--text:#edf3ff;--muted:#91a2bc;--cyan:#55d6d0;--blue:#7aa7ff;--amber:#ffca72;--red:#ff777e;--green:#7be0a3;--radius:18px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#14253b 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:#1b2940;color:var(--text);border-radius:10px;padding:10px 13px;transition:.15s}button:hover{border-color:var(--cyan);transform:translateY(-1px)}button.primary{background:var(--cyan);color:#062322;border-color:transparent;font-weight:750}button.subtle{background:transparent}button.danger{border-color:#67313d;color:#ffb2b6}.wrap{max-width:1440px;margin:auto;padding:24px}.top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:18px}.brand{display:flex;gap:13px;align-items:center}.logo{width:48px;height:48px;display:grid;place-items:center;background:linear-gradient(145deg,#65e4d5,#649bff);border-radius:15px;color:#081422;font-size:25px}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:10px;color:var(--cyan);font-weight:800}.brand h1{font-size:clamp(21px,3vw,30px);margin:2px 0 0;letter-spacing:-.04em}.subtitle{color:var(--muted);font-size:13px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.notice{border:1px solid #6e5831;background:#2b2418;color:#ffe1a9;padding:12px 15px;border-radius:12px;margin-bottom:18px;font-size:13px}.notice strong{color:#fff0cb}.hero{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;margin-bottom:16px}.panel{background:linear-gradient(160deg,rgba(21,32,51,.96),rgba(13,21,36,.98));border:1px solid var(--line);border-radius:var(--radius);padding:18px;min-width:0;box-shadow:0 12px 34px #00000016}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.panel h2{font-size:15px;margin:0;letter-spacing:-.01em}.panel h3{font-size:13px;margin:0}.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);padding:5px 9px;border-radius:99px;color:var(--muted);font-size:11px;white-space:nowrap}.dot{width:7px;height:7px;border-radius:50%;background:var(--green)}.status-layout{display:flex;align-items:center;gap:20px}.status-ring{width:94px;height:94px;flex:0 0 auto;border-radius:50%;display:grid;place-items:center;border:7px solid #284b4e;background:#0d2429;color:var(--cyan);font-weight:800;text-align:center}.status-ring.warn{border-color:#6e5730;background:#2c2417;color:var(--amber)}.status-ring.alert{border-color:#6d343d;background:#2b171f;color:var(--red)}.status-ring span{font-size:11px;display:block;font-weight:500}.status-copy{flex:1}.status-copy h2{font-size:22px;margin:0 0 4px}.status-copy p{color:var(--muted);margin:0;font-size:13px}.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.stat{background:#0c1422;border:1px solid #202e43;padding:12px;border-radius:12px}.stat small{color:var(--muted);display:block;font-size:11px}.stat strong{display:block;font-size:23px;margin-top:2px;letter-spacing:-.04em}.stat strong em{font-size:11px;color:var(--muted);font-style:normal;letter-spacing:0}.grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.85fr);gap:16px;align-items:start}.stack{display:grid;gap:16px}.sensor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.sensor{padding:13px;background:#0b1422;border:1px solid #223047;border-radius:13px;min-width:0}.sensor-top{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:9px}.sensor-label{font-weight:700;font-size:13px}.sensor-symbol{color:var(--cyan);margin-right:5px}.reading{font-weight:800;color:var(--text);font-size:13px;white-space:nowrap}.sensor input[type=range]{width:100%;accent-color:var(--cyan);margin:5px 0 0}.range-labels{display:flex;justify-content:space-between;color:#6f829d;font-size:10px}.sensor select{width:100%;background:#111e30;color:var(--text);border:1px solid #2a3b53;border-radius:8px;padding:8px;margin-top:4px}.sensor-foot{color:var(--muted);font-size:10px;margin-top:7px}.toggles{display:grid;gap:9px}.toggle-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px 12px;background:#0b1422;border:1px solid #223047;border-radius:11px}.toggle-row p{margin:2px 0 0;color:var(--muted);font-size:11px}.toggle-row strong{font-size:13px}.switch{appearance:none;width:39px;height:23px;border-radius:20px;background:#34435a;position:relative;flex:0 0 auto;cursor:pointer;transition:.2s}.switch:before{content:"";position:absolute;left:3px;top:3px;width:17px;height:17px;border-radius:50%;background:#d9e2ef;transition:.2s}.switch:checked{background:#278f8a}.switch:checked:before{left:19px;background:white}.warnings{display:grid;gap:8px}.warning{display:flex;gap:10px;padding:11px 12px;border-radius:11px;border:1px solid #27364b;background:#0b1422}.warning .ico{font-size:17px}.warning strong{font-size:12px;display:block}.warning p{font-size:11px;color:var(--muted);margin:2px 0 0}.warning.ok{border-color:#244d46}.warning.warn{border-color:#65502e;background:#211d17}.warning.alert{border-color:#63323b;background:#21151c}.warning.ok .ico{color:var(--green)}.warning.warn .ico{color:var(--amber)}.warning.alert .ico{color:var(--red)}.route-list{display:grid;gap:8px}.route{padding:12px;border:1px solid #26354a;border-radius:12px;background:#0b1422;display:flex;gap:10px;align-items:flex-start}.route.active{border-color:#4b9995;background:#102326}.route .num{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:#20314a;color:var(--cyan);font-size:12px;font-weight:800;flex:0 0 auto}.route.active .num{background:var(--cyan);color:#092120}.route strong{font-size:12px;display:block}.route p{margin:2px 0 0;color:var(--muted);font-size:11px}.route-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.route-progress{height:4px;border-radius:9px;background:#25364b;overflow:hidden;margin:12px 0}.route-progress div{height:100%;width:0;background:var(--cyan);transition:width .2s}.log{display:grid;gap:0;max-height:290px;overflow:auto}.log-entry{display:grid;grid-template-columns:64px 8px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid #202c40;font-size:12px}.log-entry:last-child{border-bottom:0}.log-time{color:#72849f;font-variant-numeric:tabular-nums}.log-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);margin-top:5px}.log-entry.alert .log-dot{background:var(--red)}.log-entry.warn .log-dot{background:var(--amber)}.log-entry strong{display:block;font-weight:650}.log-entry p{margin:2px 0 0;color:var(--muted);font-size:11px}.empty{color:var(--muted);font-size:12px;padding:15px 0}.footer{color:#657790;font-size:11px;text-align:center;padding:24px 0 6px}.section-note{color:var(--muted);font-size:11px;margin:-6px 0 13px}.mini-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-weight:800}.wide{grid-column:1/-1}.btn-row{display:flex;gap:8px;flex-wrap:wrap}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){.hero,.grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.top-actions{width:100%}.top-actions button{flex:1}}@media(max-width:520px){.wrap{padding:13px}.panel{padding:14px}.sensor-grid{grid-template-columns:1fr}.stat-grid{gap:7px}.stat{padding:9px}.stat strong{font-size:20px}.status-layout{align-items:flex-start;gap:13px}.status-ring{width:76px;height:76px;border-width:6px}.status-copy h2{font-size:19px}.log-entry{grid-template-columns:54px 7px 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="brand"><div class="logo" aria-hidden="true">⌁</div><div><div class="eyebrow">VIT Chennai · Multidisciplinary Project</div><h1>Ride Guardian <span style="color:var(--cyan)">Control Centre</span></h1><div class="subtitle">A software-only smart helmet simulation · Review 2 prototype</div></div></div>
+  <div class="top-actions"><button id="randomBtn" class="primary">✦ Generate demo readings</button><button id="resetBtn">↺ Reset session</button></div>
+</header>
+<div class="notice"><strong>DEMO MODE — SIMULATED INPUTS ONLY.</strong> This dashboard does not connect to sensors, live GPS, maps, or a camera. Warnings and thresholds are illustrative, not validated safety limits. Do not use this prototype for riding or emergency decisions.</div>
+<section class="hero">
+  <div class="panel">
+    <div class="panel-head"><h2>System overview</h2><span class="pill"><span class="dot"></span> Software simulation</span></div>
+    <div class="status-layout"><div id="statusRing" class="status-ring">READY<span>DEMO</span></div><div class="status-copy"><div class="mini-label">Current assessment</div><h2 id="statusTitle">All clear in demo</h2><p id="statusText">Adjust simulated readings to see the control centre respond.</p></div></div>
+    <div class="stat-grid"><div class="stat"><small>Active warnings</small><strong id="warningCount">0</strong></div><div class="stat"><small>Session events</small><strong id="eventCount">1</strong></div><div class="stat"><small>Helmet status</small><strong id="helmetStat">Worn</strong></div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h2>Live warning feed</h2><span id="feedPill" class="pill">0 active</span></div><div id="warnings" class="warnings"><div class="warning ok"><span class="ico">✓</span><div><strong>No active warnings</strong><p>Change an input or generate demo readings.</p></div></div></div>
+  </div>
+</section>
+<div class="grid">
+  <div class="stack">
+    <section class="panel">
+      <div class="panel-head"><h2>Simulated sensor inputs</h2><span class="pill">Updates instantly</span></div>
+      <p class="section-note">Move sliders or change selections. Values are manually controlled in-browser demo data.</p>
+      <div class="sensor-grid">
+        <div class="sensor"><div class="sensor-top"><label class="sensor-label" for="speed"><span class="sensor-symbol">◈</span>Vehicle speed</label><span class="reading" id="speedVal">35 km/h</span></div><input id="speed" type="range" min="0" max="140" value="35"><div class="range-labels"><span>0 km/h</span><span>140 km/h</span></div><div class="sensor-foot">GPS / speed sensor concept · demo threshold 80</div></div>
+        <div class="sensor"><div class="sensor-top"><label class="sensor-label" for="distance"><span class="sensor-symbol">⌖</span>Object distance</label><span class="reading" id="distanceVal">2.5 m</span></div><input id="distance" type="range" min="0" max="500" value="250"><div class="range-labels"><span>0 m</span><span>5 m</span></div><div class="sensor-foot">Ultrasonic concept · close object under 1 m</div></div>
+        <div class="sensor"><div class="sensor-top"><label class="sensor-label" for="temp"><span class="sensor-symbol">♨</span>Temperature</label><span class="reading" id="tempVal">29 °C</span></div><input id="temp" type="range" min="0" max="55" value="29"><div class="range-labels"><span>0 °C</span><span>55 °C</span></div><div class="sensor-foot">DHT11 / DHT22 concept · demo threshold 38 °C</div></div>
+        <div class="sensor"><div class="sensor-top"><label class="sensor-label" for="humidity"><span class="sensor-symbol">◌</span>Humidity</label><span class="reading" id="humidityVal">55%</span></div><input id="humidity" type="range" min="0" max="100" value="55"><div class="range-labels"><span>0%</span><span>100%</span></div><div class="sensor-foot">DHT11 / DHT22 concept</div></div>
+        <div class="sensor"><div class="sensor-top"><label class="sensor-label" for="light"><span class="sensor-symbol">☼</span>Ambient light</label><span class="reading" id="lightVal">250 lux</span></div><input id="light" type="range" min="0" max="1000" value="250"><div class="range-labels"><span>0 lux</span><span>1000 lux</span></div><div class="sensor-foot">BH1750 concept · low light below 80 lux</div></div>
+        <div class="sensor"><div class="sensor-top"><label class="sensor-label" for="gas"><span class="sensor-symbol">◉</span>Air / gas index</label><span class="reading" id="gasVal">180</span></div><input id="gas" type="range" min="0" max="1000" value="180"><div class="range-labels"><span>0</span><span>1000</span></div><div class="sensor-foot">MQ sensor concept · illustrative index above 600</div></div>
+        <div class="sensor"><div class="sensor-top"><label class="sensor-label" for="impact"><span class="sensor-symbol">ϟ</span>Motion / impact level</label><span class="reading" id="impactVal">0.8 g</span></div><input id="impact" type="range" min="0" max="100" value="8"><div class="range-labels"><span>0 g</span><span>10 g</span></div><div class="sensor-foot">MPU6050 concept · demo event threshold 3.5 g</div></div>
+        <div class="sensor"><div class="sensor-top"><label class="sensor-label" for="noise"><span class="sensor-symbol">♫</span>Noise level</label><span class="reading" id="noiseVal">55 dB</span></div><input id="noise" type="range" min="0" max="120" value="55"><div class="range-labels"><span>0 dB</span><span>120 dB</span></div><div class="sensor-foot">Microphone concept · high-noise demo threshold 90 dB</div></div>
+        <div class="sensor"><div class="sensor-top"><label class="sensor-label" for="blind"><span class="sensor-symbol">◫</span>Blind-spot sensor</label><select id="blind"><option value="clear">No simulated object</option><option value="left">Object detected — left</option><option value="right">Object detected — right</option><option value="both">Objects detected — both sides</option></select><div class="sensor-foot">IR / radar concept · selection is simulated</div></div></div>
+        <div class="sensor"><div class="sensor-top"><label class="sensor-label" for="helmet"><span class="sensor-symbol">⬡</span>Helmet-worn status</label><select id="helmet"><option value="yes">Helmet worn (simulated)</option><option value="no">Helmet not worn (simulated)</option></select></div><div class="sensor-foot">Wear detection concept · no physical detection</div></div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="panel-head"><h2>System feature triggers</h2><span class="pill">Manual toggles</span></div>
+      <div class="toggles">
+        <div class="toggle-row"><div><strong>Navigation hazard flag</strong><p>Simulate a route hazard notification</p></div><input class="switch" id="navHazard" type="checkbox" aria-label="Navigation hazard flag"></div>
+        <div class="toggle-row"><div><strong>Camera event trigger</strong><p>Logs a simulated event only; no video is recorded</p></div><button id="cameraBtn">Trigger event</button></div>
+        <div class="toggle-row"><div><strong>Ventilation demonstration</strong><p>Shows intended fan response when temperature is high</p></div><span class="pill" id="fanState">Fan standby</span></div>
+        <div class="toggle-row"><div><strong>Air filtration concept</strong><p>Shows intended filtration response to high index</p></div><span class="pill" id="filterState">Filter standby</span></div>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="panel-head"><h2>Audio navigation</h2><span class="pill">Browser text-to-speech</span></div>
+      <p class="section-note">Uses your browser's speech synthesis, if available. Sample instructions only; no live routing.</p>
+      <div class="route-list" id="routeList"></div>
+      <div class="route-progress"><div id="routeProgress"></div></div>
+      <div class="route-controls"><button id="speakBtn" class="primary">▶ Speak instruction</button><button id="nextBtn">Next instruction →</button><button id="stopSpeakBtn">Stop speech</button></div>
+      <div id="speechStatus" class="sensor-foot" aria-live="polite">Ready to speak a sample instruction.</div>
+    </section>
+  </div>
+  <div class="stack">
+    <section class="panel">
+      <div class="panel-head"><h2>Output & response status</h2><span class="pill">Rule-based demo</span></div>
+      <div id="outputs" class="warnings"></div>
+    </section>
+    <section class="panel">
+      <div class="panel-head"><h2>Session event log</h2><span class="pill" id="logPill">In this browser session</span></div>
+      <div class="btn-row" style="margin-bottom:8px"><button id="clearLogBtn" class="subtle">Clear log</button><button id="exportBtn" class="subtle">Export log (.csv)</button></div>
+      <div id="log" class="log" aria-live="polite"></div>
+    </section>
+    <section class="panel">
+      <div class="panel-head"><h2>Prototype boundaries</h2><span class="pill">Transparency</span></div>
+      <div class="warnings">
+        <div class="warning ok"><span class="ico">✓</span><div><strong>Implemented in this file</strong><p>Manual controls, illustrative rule checks, responsive dashboard, session log, sample route instructions, browser speech, random demo values.</p></div></div>
+        <div class="warning warn"><span class="ico">!</span><div><strong>Simulated only</strong><p>All sensor values, helmet status, blind-spot detections, hazard flags, camera event and ventilation/filter states.</p></div></div>
+        <div class="warning alert"><span class="ico">×</span><div><strong>Not implemented or certified</strong><p>Hardware connections, real accident detection, real blind-spot detection, live GPS/maps, video recording, emergency services, validated safety thresholds.</p></div></div>
+      </div>
+    </section>
+  </div>
+</div>
+<footer class="footer">Ride Guardian Smart Helmet · VIT Chennai · Review 2 software prototype · No physical sensors connected</footer>
+</div>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const inputs = ['speed','distance','temp','humidity','light','gas','impact','noise','blind','helmet','navHazard'];
+const routes = [
+ {title:'Continue straight for 300 metres',detail:'Sample route · instruction 1 of 4'},
+ {title:'At the next junction, keep to the left',detail:'Sample route · instruction 2 of 4'},
+ {title:'Caution: simulated road hazard ahead',detail:'Sample route · instruction 3 of 4'},
+ {title:'Destination is approaching on your right',detail:'Sample route · instruction 4 of 4'}
+];
+let routeIndex=0, logEntries=[], lastWarningKey='', started=Date.now();
+const fmtTime = () => new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+function logEvent(title,detail,type='info'){logEntries.unshift({time:fmtTime(),title,detail,type}); if(logEntries.length>200)logEntries.pop();renderLog();}
+function read(){return {speed:+$('speed').value,distance:+$('distance').value/100,temp:+$('temp').value,humidity:+$('humidity').value,light:+$('light').value,gas:+$('gas').value,impact:+$('impact').value/10,noise:+$('noise').value,blind:$('blind').value,helmet:$('helmet').value,navHazard:$('navHazard').checked};}
+function evaluate(v){
+ const w=[];
+ if(v.helmet==='no')w.push(['alert','Helmet status','Helmet marked as not worn in this simulation.']);
+ if(v.speed>=80)w.push(['warn','High demo speed','Speed crossed the illustrative 80 km/h threshold.']);
+ if(v.distance<1)w.push(['alert','Nearby object','Simulated object is less than 1 metre away.']);
+ if(v.impact>=3.5)w.push(['alert','Possible impact event','Motion level crossed the illustrative impact threshold; this is not accident detection.']);
+ if(v.temp>=38)w.push(['warn','High temperature','Ventilation concept would activate at this demo threshold.']);
+ if(v.gas>600)w.push(['warn','Air index elevated','Filtration concept would activate; this index is not a calibrated gas concentration.']);
+ if(v.light<80)w.push(['warn','Low ambient light','Simulated light is below the illustrative 80 lux threshold.']);
+ if(v.noise>=90)w.push(['warn','High noise level','Simulated noise crossed the illustrative 90 dB threshold.']);
+ if(v.blind!=='clear')w.push(['alert','Blind-spot indication',v.blind==='both'?'Simulated objects indicated on both sides.':`Simulated object indicated on the ${v.blind} side.`]);
+ if(v.navHazard)w.push(['warn','Navigation hazard flag','A sample route hazard has been manually enabled.']);
+ return w;
+}
+function card(type,title,detail,icon){return `<div class="warning ${type}"><span class="ico">${icon|| (type==='alert'?'⚠':type==='warn'?'!':'✓')}</span><div><strong>${title}</strong><p>${detail}</p></div></div>`;}
+function renderLog(){ $('eventCount').textContent=logEntries.length; $('logPill').textContent=`${logEntries.length} event${logEntries.length===1?'':'s'} this session`; $('log').innerHTML=logEntries.length?logEntries.map(e=>`<div class="log-entry ${e.type}"><span class="log-time">${e.time}</span><span class="log-dot"></span><div><strong>${escapeHtml(e.title)}</strong><p>${escapeHtml(e.detail)}</p></div></div>`).join(''):'<div class="empty">No events logged. Change an input or run a demo.</div>'; }
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function render(){
+ const v=read(), warnings=evaluate(v), alertCount=warnings.filter(x=>x[0]==='alert').length, warnCount=warnings.length-alertCount;
+ $('speedVal').textContent=`${v.speed} km/h`; $('distanceVal').textContent=`${v.distance.toFixed(1)} m`; $('tempVal').textContent=`${v.temp} °C`; $('humidityVal').textContent=`${v.humidity}%`; $('lightVal').textContent=`${v.light} lux`; $('gasVal').textContent=v.gas; $('impactVal').textContent=`${v.impact.toFixed(1)} g`; $('noiseVal').textContent=`${v.noise} dB`;
+ $('helmetStat').textContent=v.helmet==='yes'?'Worn':'Not worn'; $('warningCount').textContent=warnings.length; $('feedPill').textContent=`${warnings.length} active`;
+ const ring=$('statusRing'); ring.className='status-ring'+(alertCount?' alert':warnCount?' warn':'');
+ ring.innerHTML=alertCount?'ALERT<span>DEMO</span>':warnCount?'CAUTION<span>DEMO</span>':'READY<span>DEMO</span>';
+ $('statusTitle').textContent=alertCount?'Attention needed':warnCount?'Review warnings':'All clear in demo';
+ $('statusText').textContent=alertCount?`${alertCount} alert-level and ${warnCount} caution-level demo condition(s).` :warnCount?`${warnCount} caution-level demo condition(s) need review.`:'No illustrative warning rules are currently triggered.';
+ $('warnings').innerHTML=warnings.length?warnings.map(w=>card(w[0],w[1],w[2])).join(''):card('ok','No active warnings','Change an input or generate demo readings.','✓');
+ const outputs=[
+ ['ok','Navigation audio',`Sample instructions available. Current: ${routes[routeIndex].title}`],
+ [v.blind==='clear'?'ok':'alert','Blind-spot status',v.blind==='clear'?'No object selected in simulation.':`Simulated ${v.blind} side indication.`],
+ [v.distance<1?'alert':'ok','Nearby object',v.distance<1?'Close-object demo warning active.':`Simulated object distance: ${v.distance.toFixed(1)} m.`],
+ [v.impact>=3.5?'alert':'ok','Motion / impact',v.impact>=3.5?'Threshold crossed; possible impact event logged, not verified.':`Simulated motion level ${v.impact.toFixed(1)} g.`],
+ [v.temp>=38?'warn':'ok','Temperature / ventilation',v.temp>=38?'Ventilation concept: ON (simulated).':'Ventilation concept: standby.'],
+ [v.gas>600?'warn':'ok','Air index / filtration',v.gas>600?'Filtration concept: ON (simulated).':'Filtration concept: standby.'],
+ [v.light<80?'warn':'ok','Ambient light',v.light<80?'Low-light warning active.':'Light level above demo threshold.'],
+ [v.noise>=90?'warn':'ok','Noise level',v.noise>=90?'High-noise warning active.':'Noise level below demo threshold.'],
+ [v.helmet==='no'?'alert':'ok','Helmet-worn status',v.helmet==='yes'?'Marked worn (manual simulation).':'Marked not worn (manual simulation).'],
+ [v.navHazard?'warn':'ok','Navigation hazard',v.navHazard?'Sample hazard flag enabled.':'No sample hazard flag enabled.'],
+ ['ok','Camera event', 'Trigger button logs a marker only; no video is captured.']
+ ];
+ $('outputs').innerHTML=outputs.map(x=>card(x[0],x[1],x[2])).join('');
+ $('fanState').textContent=v.temp>=38?'Fan ON · demo':'Fan standby'; $('filterState').textContent=v.gas>600?'Filter ON · demo':'Filter standby';
+ const key=warnings.map(w=>w[1]).join('|');
+ if(key!==lastWarningKey){if(key)logEvent('Warning state changed',warnings.map(w=>w[1]).join(', '),alertCount?'alert':warnCount?'warn':'info');else if(lastWarningKey)logEvent('Warnings cleared','No illustrative warning rules currently triggered.');lastWarningKey=key;}
+}
+function renderRoutes(){ $('routeList').innerHTML=routes.map((r,i)=>`<div class="route ${i===routeIndex?'active':''}"><div class="num">${i+1}</div><div><strong>${r.title}</strong><p>${r.detail}</p></div></div>`).join(''); $('routeProgress').style.width=`${((routeIndex+1)/routes.length)*100}%`; }
+function speak(){const text=routes[routeIndex].title;if(!('speechSynthesis'in window)){ $('speechStatus').textContent='Text-to-speech is not supported in this browser.';return;}window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-IN';u.rate=0.92;u.onstart=()=>{$('speechStatus').textContent='Speaking current sample instruction…';};u.onend=()=>{$('speechStatus').textContent='Instruction finished.';};u.onerror=()=>{$('speechStatus').textContent='Speech could not play. Check browser audio permissions.';};window.speechSynthesis.speak(u);logEvent('Navigation instruction spoken',text);}
+function setVal(id,val){$(id).value=val;}
+inputs.forEach(id=>$(id).addEventListener(id==='navHazard'||id==='blind'||id==='helmet'?'change':'input',()=>{render();}));
+$('randomBtn').addEventListener('click',()=>{
+ setVal('speed',Math.floor(Math.random()*111));setVal('distance',Math.floor(Math.random()*501));setVal('temp',Math.floor(20+Math.random()*26));setVal('humidity',Math.floor(30+Math.random()*61));setVal('light',Math.floor(Math.random()*501));setVal('gas',Math.floor(Math.random()*901));setVal('impact',Math.floor(Math.random()*61));setVal('noise',Math.floor(35+Math.random()*76));setVal('blind',['clear','clear','left','right','both'][Math.floor(Math.random()*5)]);setVal('helmet',Math.random()>.12?'yes':'no');$('navHazard').checked=Math.random()>.75;logEvent('Demo readings generated','Randomized simulated sensor values for demonstration.');render();});
+$('resetBtn').addEventListener('click',()=>{setVal('speed',35);setVal('distance',250);setVal('temp',29);setVal('humidity',55);setVal('light',250);setVal('gas',180);setVal('impact',8);setVal('noise',55);setVal('blind','clear');setVal('helmet','yes');$('navHazard').checked=false;routeIndex=0;if('speechSynthesis'in window)window.speechSynthesis.cancel();renderRoutes();logEntries=[];lastWarningKey='';logEvent('Session reset','All controls returned to their default demo values.');render();});
+$('cameraBtn').addEventListener('click',()=>{logEvent('Camera event trigger','Simulated event marker only. No camera access or video recording occurred.','warn');$('speechStatus').textContent='Camera event marker added to the session log; no video recorded.';});
+$('navHazard').addEventListener('change',()=>{if($('navHazard').checked)logEvent('Navigation hazard enabled','Sample hazard flag manually switched on.','warn');});
+$('speakBtn').addEventListener('click',speak);
+$('nextBtn').addEventListener('click',()=>{routeIndex=(routeIndex+1)%routes.length;renderRoutes();render();logEvent('Navigation instruction advanced',routes[routeIndex].title);});
+$('stopSpeakBtn').addEventListener('click',()=>{if('speechSynthesis'in window)window.speechSynthesis.cancel();$('speechStatus').textContent='Speech stopped.';});
+$('clearLogBtn').addEventListener('click',()=>{logEntries=[];renderLog();logEvent('Log cleared','A new log entry confirms the log was cleared.');});
+$('exportBtn').addEventListener('click',()=>{const rows=[['Time','Event','Details','Type'],...logEntries.slice().reverse().map(e=>[e.time,e.title,e.detail,e.type])];const csv=rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='ride-guardian-session-log.csv';a.click();URL.revokeObjectURL(url);logEvent('Log exported','CSV download requested.');});
+renderRoutes();logEvent('Session started','Ride Guardian software-only simulation loaded.');render();
+})();
+</script>
+</body>
+</html>
